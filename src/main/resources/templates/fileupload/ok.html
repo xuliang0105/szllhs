@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>上传成功</title>
+</head>
+<body>
+    <div th:if="${fileNames}" th:each="lm : ${fileNames}">
+    	<table>
+    		<tr>
+    			<td th:each="entry : ${lm}" th:text="${entry.key}" ></td>
+    			<td th:each="entry : ${lm}" th:text="上传地址：${entry.value}"></td>
+    		</tr>
+    	</table>
+    </div>
+</body>
+</html>
