@@ -50,9 +50,17 @@ public class RestResp implements java.io.Serializable {
         this(code, msg, null);
     }
 
+    private RestResp(Integer code, Object data) {
+        this.code = code;
+        this.data = data;
+    }
 
     public static RestResp ok(String msg) {
         return new RestResp(OK, msg);
+    }
+    
+    public static RestResp ok(Object data) {
+        return new RestResp(OK, data);
     }
     
     public static RestResp ok(String msg,String path) {

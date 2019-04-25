@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yzjk.system.sys.mapper.RoleMapper">
+
+	<resultMap id="roleMap" type="com.yzjk.system.sys.entity.Role">
+        <id property="id" column="id"/>
+	    <result property="name" column="name"/>
+        <result property="remark" column="remark"/>
+        <result property="seq" column="seq"/>
+        <result property="pid" column="pid"/>
+    </resultMap>
+
+	<sql id="Base_Column_List">
+		id,name,remark,seq,pid	</sql>
+
+</mapper>

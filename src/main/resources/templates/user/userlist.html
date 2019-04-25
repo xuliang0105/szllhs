@@ -20,13 +20,12 @@
             <td>管理</td>
         </tr>
         <tr th:each="user:${contents}">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.psName}"></td>
-            <td><a th:href="@{'/user/'+${user.id}}" th:text="${user.cardNo}"></a></td>
-            <td><a th:href="@{'/user/delete/'+${user.id}}">删除</a></td>
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.userName}"></td>
+            <td><a th:href="@{'/user/'+${user.userId}}" th:text="${user.idcard}"></a></td>
+            <td><a th:href="@{'/user/delete/'+${user.userId}}">删除</a></td>
         </tr> 
     </thead>
 </table>
-
 </body>
 </html>

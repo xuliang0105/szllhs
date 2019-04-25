@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace=" com.yzjk.system.disease.mapper.DiseaseInfoMapper">
+
+	<resultMap id="diseaseInfoMap" type="com.yzjk.system.disease.entity.DiseaseInfo">
+        <id property="diseaseId" column="disease_id"/>
+	    <result property="diseaseName" column="disease_name"/>
+        <result property="diseaseOtherName" column="disease_other_name"/>
+        <result property="diseaselogo" column="diseaseLogo"/>
+        <result property="spell" column="spell"/>
+        <result property="infectiousness" column="infectiousness"/>
+        <result property="pronePopulation" column="prone_population"/>
+        <result property="diseasedPart" column="diseased_part"/>
+        <result property="diseaseSummary" column="disease_summary"/>
+        <result property="diseaseCause" column="disease_cause"/>
+        <result property="symptomDescription" column="symptom_description"/>
+        <result property="foodSafe" column="food_safe"/>
+        <result property="prevention" column="prevention"/>
+        <result property="treatment" column="treatment"/>
+        <result property="examinationDescription" column="examination_description"/>
+        <result property="differentialDiagosis" column="differential_diagosis"/>
+        <result property="complication" column="complication"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<sql id="Base_Column_List">
+		disease_id,disease_name,disease_other_name,diseaseLogo,spell,infectiousness,prone_population,diseased_part,disease_summary,disease_cause,symptom_description,food_safe,prevention,treatment,examination_description,differential_diagosis,complication,create_time	</sql>
+
+</mapper>
