@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.yzjk.common.security.auth.MyUserDetailsService;
+
 
 @Configuration
 @EnableWebSecurity
@@ -35,10 +37,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/index.html");
+        
+        //解决不允许显示在iframe的问题
+        http.headers().frameOptions().disable();
+        
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    	 //不删除凭据，以便记住用户
+    	auth.eraseCredentials(false);
+    	// 自定义UserDetailsService,设置加密算法
         auth.userDetailsService(myUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
