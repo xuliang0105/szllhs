@@ -23,6 +23,7 @@ import com.yzjk.common.conf.FileUploadPath;
 public class UploadController {
 	   @Autowired  FileUploadPath fileUploadPath;
 	
+	
 	@GetMapping("")
 	public String uploladPage() {
 		return "fileupload/upload";

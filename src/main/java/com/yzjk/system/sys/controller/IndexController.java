@@ -14,11 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 public class IndexController {
 
 	//首页
-	@RequestMapping("")
+	@RequestMapping(value= {"","/index"})
 	public String index(Model model, HttpServletResponse response) {
 			log.info("index{}");
 		    model.addAttribute("name", "simonsfan");
-		    return "/index";
+		    return "index";
 		}
 
 }

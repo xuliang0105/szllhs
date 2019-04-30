@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html;charset=UTF-8"/>
+    <title>Content</title>
+</head>
+<body>
+
+
+ <td th:text="${files}"></td>
+ 
+<table border="2">
+    <thead>
+        <tr th:each="fl:${files}">
+            <td th:text="${fl}"></td>
+           <!--  <td><a th:href="@{'/downfile/downfile?filename='+${fl}}" id="">下载</a></td> -->
+        </tr> 
+    </thead>
+</table>
+
+
+ 
+</body>
+</html>

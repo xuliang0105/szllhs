@@ -1,5 +1,6 @@
 package com.yzjk.system.sys.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("sys_user")
-public class SysUser   extends Model<SysUser>{
+public class SysUser   extends Model<SysUser> implements Serializable{
 	private static final long serialVersionUID = 1L;
     @TableId(type = IdType.INPUT)
     private Long userId;
@@ -52,6 +53,8 @@ public class SysUser   extends Model<SysUser>{
    */
     private Date createTime;
 	
+    
+    @TableField(exist = false)
     private List<Role> roleList;
     
     @TableField(exist = false)

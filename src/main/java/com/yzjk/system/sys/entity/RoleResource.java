@@ -1,5 +1,7 @@
 package com.yzjk.system.sys.entity;
 
+import java.io.Serializable;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -17,7 +19,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("role_resource")
-public class RoleResource extends Model<RoleResource> {
+public class RoleResource extends Model<RoleResource> implements Serializable{
 private static final long serialVersionUID = 1L;
 
     /**

@@ -11,7 +11,7 @@
  Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 25/04/2019 18:19:51
+ Date: 30/04/2019 17:38:22
 */
 
 SET NAMES utf8mb4;
@@ -271,7 +271,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1107540585947914301, 'zhangsan', '$2a$10$RpFJjxYiXdEsAGnWp/8fsOetMuOON96Ntk/Ym2M/RKRyU0GZseaDC', '张三', NULL, NULL, NULL, 1, NULL, NULL, '2019-03-18 15:15:55');
+INSERT INTO `sys_user` VALUES (1107540585947914301, 'zhangsan', '$2a$10$ChwQjf/5/j/Z9Sj6mwQ.z.3wtkd2OkoYXaYgZv7P7WtC6JNlH6Py6', '张三', NULL, NULL, NULL, 1, NULL, NULL, '2019-03-18 15:15:55');
 INSERT INTO `sys_user` VALUES (1111555940863119362, 'szsetyy1', '$2a$10$e2U.4xHXgGhQYP8sbzOllucN0fGiWGLl8lSHcjLTq3ERSypDY/EuK', '深圳市儿童医院', NULL, NULL, NULL, 1, NULL, NULL, '2019-03-29 04:09:23');
 INSERT INTO `sys_user` VALUES (1111555941588733954, 'szsfybjy', '$2a$10$QF7lVDBAOevp/ypeS5DuYu0Tydp19msWLNOWBX1UySnCQ7cHr2k3.', '深圳市妇幼保健院', NULL, NULL, NULL, 1, NULL, NULL, '2019-03-29 04:09:23');
 INSERT INTO `sys_user` VALUES (1111555941987192833, 'szsfybjyek', '$2a$10$5ipP8m9lOmLIa74p1cNasexKjTPvtbRXAWGXj4iyaeMMjzorLwa/G', '儿科', NULL, NULL, NULL, 1, NULL, NULL, '2019-03-29 04:09:23');
@@ -288,14 +288,13 @@ CREATE TABLE `user_role`  (
   INDEX `role_id`(`role_id`) USING BTREE,
   INDEX `role_id_2`(`role_id`) USING BTREE,
   INDEX `role_id_3`(`role_id`) USING BTREE,
-  CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_temp` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
-INSERT INTO `user_role` VALUES (0, 0);
+INSERT INTO `user_role` VALUES (1107540585947914301, 0);
 
 -- ----------------------------
 -- Table structure for user_temp
@@ -326,5 +325,78 @@ INSERT INTO `user_temp` VALUES (6347668822590469, '2019-04-17 10:47:57', '2019-0
 INSERT INTO `user_temp` VALUES (6347668822590480, '2019-04-17 10:47:57', '2019-04-17 10:47:57', 'test8', 'e10adc3949ba59abbe56e057f20f883e', 'test8');
 INSERT INTO `user_temp` VALUES (6347668822590481, '2019-04-17 10:47:57', '2019-04-17 10:47:57', 'test81', 'e10adc3949ba59abbe56e057f20f883e', 'test81');
 INSERT INTO `user_temp` VALUES (6347668822590482, '2019-04-17 10:47:57', '2019-04-17 10:47:57', 'test82', 'e10adc3949ba59abbe56e057f20f883e', 'test82');
+
+-- ----------------------------
+-- Table structure for WebResource
+-- ----------------------------
+DROP TABLE IF EXISTS `WebResource`;
+CREATE TABLE `WebResource`  (
+  `id` int(50) NOT NULL,
+  `uri` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `methodType` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `des` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `optType` int(255) NULL DEFAULT NULL,
+  `sysName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `clsName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `methodName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `addTime` bigint(50) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for WebRole
+-- ----------------------------
+DROP TABLE IF EXISTS `WebRole`;
+CREATE TABLE `WebRole`  (
+  `id` int(20) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `des` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `addTime` bigint(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for WebRoleOwnResource
+-- ----------------------------
+DROP TABLE IF EXISTS `WebRoleOwnResource`;
+CREATE TABLE `WebRoleOwnResource`  (
+  `id` int(11) NOT NULL,
+  `roleId` int(11) NULL DEFAULT NULL,
+  `resourceId` int(11) NULL DEFAULT NULL,
+  `addTime` bigint(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for WebUser
+-- ----------------------------
+DROP TABLE IF EXISTS `WebUser`;
+CREATE TABLE `WebUser`  (
+  `id` int(20) NOT NULL,
+  `nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `userName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `age` int(11) NULL DEFAULT NULL,
+  `sex` int(11) NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `addTime` bigint(30) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of WebUser
+-- ----------------------------
+INSERT INTO `WebUser` VALUES (1, 'aa-a', 'aa', 1, 1, '123456', 20190501151302);
+
+-- ----------------------------
+-- Table structure for WebUserOwnRole
+-- ----------------------------
+DROP TABLE IF EXISTS `WebUserOwnRole`;
+CREATE TABLE `WebUserOwnRole`  (
+  `id` int(30) NOT NULL,
+  `userId` int(30) NULL DEFAULT NULL,
+  `roleId` int(30) NULL DEFAULT NULL,
+  `addTime` bigint(30) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

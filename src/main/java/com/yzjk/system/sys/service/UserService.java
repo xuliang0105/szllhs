@@ -7,4 +7,7 @@ public interface UserService extends IService<SysUser>{
 	
 	SysUser getUserByName(String userName);
 	
+	
+	SysUser getUserByUserId(Long userId);
+	
 }

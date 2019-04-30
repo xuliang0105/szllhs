@@ -1,11 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout= "http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-     首页
+    <h1>欢迎您~~~</h1>
+
+    <div sec:authorize="!isAuthenticated()">
+        <a th:href="@{/userInfo/userLogin}"> index去登陆 -&gt; </a>
+    </div>
+    
+    <div sec:authorize="isAuthenticated()">
+        <h2><span sec:authentication="name" ></span>您好 ^ _ ^</h2>
+        <form method="post" th:action="@{/logout}" >
+            <input type="submit" value="注销">
+        </form>
+    </div>
+
+    <div sec:authorize="hasRole('root')">
+        这是个秘密
+    </div>
+
 </body>
 </html>

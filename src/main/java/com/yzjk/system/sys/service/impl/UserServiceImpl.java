@@ -34,22 +34,35 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
 		SysUser user = null;
 		if(StringUtils.isNotEmpty(userName)) {
 			user = getOne(Wrappers.<SysUser>query().lambda().eq(SysUser::getUserName,userName));
-			
+			user = getUserByUserId(user.getUserId());
+			return user;
+		}
+		return null;
+	}
+
+	@Override
+	public SysUser getUserByUserId(Long userId) {
+		if(userId > 0 ) {
+			SysUser user = new SysUser();
+			user.setUserId(userId);
 			//角色列表
 			List<UserRole> userRole = userRoleService.list(Wrappers.<UserRole>query().lambda().eq(UserRole::getUserId,user.getUserId()));
 			List<Long> roleIds = userRole.stream().map(UserRole::getRoleId).collect(Collectors.toList());
-			List<Role> roleList = (List<Role>) roleService.listByIds(roleIds);
-			
-			for(Role r : roleList) {
-				//资源列表
-			  List<RoleResource> roleResource=  roleResourceService.list(Wrappers.<RoleResource>query().lambda().eq(RoleResource::getRoleId,r.getId()));
-			  List<Long> resourceIds = roleResource.stream().map(RoleResource::getResourceId).collect(Collectors.toList());
-			  List<Resource> resource =(List<Resource>)resourceService.listByIds(resourceIds);
-			  r.setResourceList(resource);
+			if(roleIds != null && roleIds.size() > 0) {
+				List<Role> roleList = (List<Role>) roleService.listByIds(roleIds);
+				if(roleList!=null && roleList.size() > 0 ) {
+					for(Role r : roleList) {
+						//资源列表
+					  List<RoleResource> roleResource=  roleResourceService.list(Wrappers.<RoleResource>query().lambda().eq(RoleResource::getRoleId,r.getId()));
+					  List<Long> resourceIds = roleResource.stream().map(RoleResource::getResourceId).collect(Collectors.toList());
+					  List<Resource> resource =(List<Resource>)resourceService.listByIds(resourceIds);
+					  r.setResourceList(resource);
+					}
+					 user.setRoleList(roleList);
+					 EhCacheProvider.put("userCache", user.getUserId(), user);
+				}
+				return user;
 			}
-			 user.setRoleList(roleList);
-			 EhCacheProvider.put("userCache", user.getUserId(), user);
-			return user;
 		}
 		return null;
 	}

@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.yzjk.system.sys.entity.Resource;
 import com.yzjk.system.sys.entity.Role;
 import com.yzjk.system.sys.entity.SysUser;
@@ -38,7 +39,9 @@ public class MyUserDetailsService implements UserDetailsService {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for(Role role: sysUser.getRoleList()) {
         	for(Resource resource: role.getResourceList()) {
-        		authorities.add(new SimpleGrantedAuthority(resource.getUrl()));
+        		if(StringUtils.isNotEmpty(resource.getUrl())) {
+        			authorities.add(new SimpleGrantedAuthority(resource.getUrl()));
+        		}
         	}
         }
         

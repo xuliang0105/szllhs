@@ -1,6 +1,8 @@
 package com.yzjk.system.sys.entity;
 
 
+import java.io.Serializable;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -18,7 +20,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("resource")
-public class Resource extends Model<Resource> {
+public class Resource extends Model<Resource> implements Serializable{
 private static final long serialVersionUID = 1L;
 
     /**

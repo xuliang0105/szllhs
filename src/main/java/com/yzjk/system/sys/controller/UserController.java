@@ -29,13 +29,13 @@ public class UserController {
 	@Autowired
     private UserService userService;
 	 
-		@PostMapping("/userLogin")
+		@GetMapping("/userLogin")
 		public String userLogin(Model model,String loginAfterUrl){
 			model.addAttribute("loginAfterUrl", loginAfterUrl);
 		    return "login";
 		}
 	
-		@PostMapping("/login")
+		@RequestMapping("/login")
 		@ResponseBody
 		//@Cacheable(key = "User + login +#p0")
 		 public RestResp login(Model model,SysUser user,String loginAfterUrl){
@@ -54,13 +54,13 @@ public class UserController {
 	    }
 		
 		
-		@GetMapping("/userRegister")
+		@RequestMapping("/userRegister")
 		 public String userRegister(Model model,String loginAfterUrl){
 			model.addAttribute("loginAfterUrl", loginAfterUrl);
 	       return "register";
 	    }
 		
-		@PostMapping("/register")
+		@RequestMapping("/register")
 		@ResponseBody
 		 public RestResp register(Model model,SysUser user,String loginAfterUrl){
 			if(StringUtils.isNotEmpty(user.getUserName())) {

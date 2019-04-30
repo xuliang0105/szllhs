@@ -1,8 +1,10 @@
 package com.yzjk.system.sys.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -19,7 +21,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("role")
-public class Role extends Model<Role> {
+public class Role extends Model<Role> implements Serializable{
 private static final long serialVersionUID = 1L;
 
     /**
@@ -44,5 +46,6 @@ private static final long serialVersionUID = 1L;
    */
     private Long pid;
   
+    @TableField(exist = false)
     private List<Resource> resourceList;
 }
